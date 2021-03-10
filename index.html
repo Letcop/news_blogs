@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <script src="ckeditor/ckeditor.js"></script>
+    <title>Новости и блог</title>
+</head>
+
+<body>
+
+    <section class="container">
+
+        <!-- ==================Хидер========================= -->
+        <header>
+            <div class="navbar">
+                <div class="logo_header">
+                    <a href=""><img src="icons/nav_logo.png" alt=""></a>
+                </div>
+                <div class="search">
+                    <input type="text" placeholder="Поиск">
+                    <div class="search_btn">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="chat">
+                    <i class="fas fa-comment">
+                        <span>99</span>
+                    </i>
+                    <div class="chat_text" style="display: none;">
+                        <ul>
+                            <li><a href="">Чаты администраторов</a> <br>
+                                Этот чат отвечает за то чтобы мы могли отвечать пользователям на вопросы, и общаться с
+                                каждым
+                                пользователям от имени “Поддержки” (администрации)
+                            </li> <br>
+                            <li><a href="">Чаты пользователей</a> <br>
+                                Этот чат отвечает за то чтобы мы могли видеть все переписки людей между собой и
+                                контролировать
+                                правильность и корректность работы и общения между пользователями, более подробнее еще
+                                опишу
+                                ниже
+                                внимательно читаем и смотрим всё и вникаем в логику ТЗ и прототипов, будет трудно но всё
+                                возможно и
+                                зависит от нашего желания!
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="avatar">
+                    <img src="img/user4.png" alt="">
+                </div>
+            </div>
+        </header>
+        <!-- ==================Хидер========================= -->
+
+        <div class="block">
+
+            <!-- ==================Меню========================= -->
+            <aside class="menu_item">
+                <div class="all_category">
+                    Все категории
+                    <i class="fas fa-bars"></i>
+                </div>
+                <a href="" class="menu_list first_menu">Главная страница</a>
+                <a href="" class="menu_list">Заказы и Вакансии</a>
+                <a href="" class="menu_list">Безопасный платеж</a>
+                <a href="" class="menu_list">Творческая мастерская</a>
+                <a href="" class="menu_list">Реферальная программа</a>
+                <a href="" class="menu_list">Услуги и аукцион </a>
+                <a href="" class="menu_list">Пользователи</a>
+                <a href="" class="menu_list">Верификация</a>
+                <div href="" class="menu_list blogs_posts" onclick="showHide()">Блог и новости </div>
+                <div class="hidden">
+                    <div class="showPosts" onclick="showPosts()">Посты</div>
+                    <div class="showCategories" onclick="showCategories()">Категории</div>
+                    <div class="showComments" onclick="showComments()">Комментарии</div>
+                </div>
+                <a href="" class="menu_list">Форум</a>
+                <a href="" class="menu_list">Страницы</a>
+                <a href="" class="menu_list">Уведомления </a>
+                <a href="" class="menu_list">Бонусы</a>
+                <a href="" class="menu_list">Работа с почтой</a>
+                <a href="" class="menu_list drop_menu_link_specialization">Специализации</a>
+                <div class="drop_menu_block_specialization">
+                    <ul class="drop_menu_specialization">
+                        <li class="drop_menu_specialization_item" data-open="first-section">Категории</li>
+                        <li class="drop_menu_specialization_item" data-open="second-section">Доп.навык</li>
+                        <li class="drop_menu_specialization_item" data-open="third-section">Настройки</li>
+                    </ul>
+                </div>
+                <a href="" class="menu_list">SEO- оптимизация</a>
+                <a href="" class="menu_list">Настройка сайта</a>
+            </aside>
+            <!-- ==================Меню========================= -->
+
+
+
+            <!-- ==================Посты========================= -->
+            <div class="posts">
+
+                <div class="posts__header">
+                    <div class="posts__title">Блог / Посты</div>
+                    <div class="posts__add" onclick="newPost()">+ Добавить пост</div>
+                </div>
+
+                <div class="posts__nav" onclick="changePosts()">
+                    <label id="blogPostsLabel" class="selectedNav__item" for="BlogPostsCheckbox">Блог</label>
+                    <input type="radio" checked name="PostsCheckbox" id="BlogPostsCheckbox" style="display: none;">
+                    <label id="newsPostsLabel" for="newsPostsBox">Новости</label>
+                    <input type="radio" name="PostsCheckbox" id="newsPostsBox" style="display: none;">
+                </div>
+
+                <div class="posts__sort">
+                    <form class="sort__search">
+                        <input type="search" name="searchByIdTitle" id="searchByIdTitle" placeholder="ID / загаловок"
+                            oninput="postSearchById(event)">
+                    </form>
+                </div>
+
+
+
+                <div class="blog_posts__list">
+                    <table class="blog_posts__list_table">
+                    </table>
+                </div>
+
+                <div class="news_posts__list" style="display: none;">
+                    <table class="news_posts__list_table">
+                    </table>
+                </div>
+            </div>
+
+            <div class="editPost" style="display: none;">
+                <div class="editPost__header">
+                    <div class="editPost__title">Блог / Редактирование поста</div>
+                </div>
+                <div class="editPost__nav" onclick="editPostNav()">
+
+                    <label for="main">
+                        <div class="editPost__nav_item editPost__nav_active">Основные</div>
+                    </label>
+                    <input type="radio" name="editPost__radio" id="main" class="editPost__nav_radio" checked
+                        onchange="editPostCHange()">
+
+                    <label for="comments">
+                        <div class="editPost__nav_item">Комментарии</div>
+                    </label>
+                    <input type="radio" name="editPost__radio" id="comments" class="editPost__nav_radio"
+                        onchange="editPostCHange()">
+                </div>
+
+                <div class="editPost__main editPost__item">
+                    <div class="editPost__category">
+                        Категория:
+                        <select name="editCategory" id="editCategory" class="editPost__editCategory">
+                            <option value="Выбрать категорию">Выбрать категорию</option>
+                        </select>
+                    </div>
+                    <div class="editPost__post_title">
+                    </div>
+
+                    <div class="editPost__text">
+
+                    </div>
+
+
+                    <div class="commentAllowed">
+                        <label for="commentAllowed">Комментарии разрешены</label> <input type="checkbox"
+                            name="commentAllowed" id="commentAllowed" checked>
+                    </div>
+                    <div class="editPost__user">
+                    </div>
+                    <div class="editPost__status">
+                    </div>
+
+                    <div class="editPost__do"></div>
+                </div>
+                <div class="editPost__comments editPost__item" style="display: none;">
+                    <div class="comments__nav">
+
+                        <label for="selectAllComments">Отметить все: </label>
+                        <input type="checkbox" name="selectSelectAllComments" id="editSelectAllComments"
+                            onclick="editSelectAllComments(event)">
+
+                        <span id="editApproveSelectedComment">Одобрить</span> <span
+                            id="editDeleteSelectedComment">Удалить</span>
+                    </div>
+                    <table class="editPost__comments_table"></table>
+                </div>
+            </div>
+
+            <div class="editPost__comments" style="display: none;">
+            </div>
+
+            <div class="newPost" style="display: none;">
+
+                <div class="newPost__category">
+                    <label for="newPostCategory">Категория: </label>
+                    <select name="newPostCategory" id="newPostCategory"></select>
+                </div>
+
+                <div class="newPost__title">
+                    <label for="newPostTitle">Заголовок: </label>
+                    <input type="text" id="newPostTitle">
+                </div>
+
+                <div class="newPostText">
+                    <label for="editPostText">Текст: </label>
+                    <textarea name="editPostText" id="editPostText" cols="30" rows="10"></textarea>
+                    <script>CKEDITOR.replace('editPostText')</script>
+                </div>
+
+                <div class="newPost__comment_approve">
+                    <label for="newPostCommentsApprove">Комментарии разрешены: </label>
+                    <input type="checkbox" name="newPostCommentsApprove" id="newPostCommentsApprove">
+                </div>
+
+                <div class="newPost__type">
+                    Тип поста:
+                    <label for="blogPost">Блог</label>
+                    <input type="radio" name="postType" value="blog" id="blogPost" checked>
+
+                    <label for="newsPost">Новости</label>
+                    <input type="radio" name="postType" value="news" id="newsPost">
+
+                </div>
+
+                <div class="newPost__do">
+                    <button class="newCategory__save green" onclick="addPost()">Сохранить</button>
+                    <button class="newCategory__cancel green" onclick="addPostCancel()">Назад</button>
+                </div>
+
+            </div>
+
+            <!-- ==================Посты========================= -->
+
+
+
+            <!-- ==================Категории========================= -->
+            <div class="categories" style="display: none;">
+                <div class="categories__header">
+                    <div class="categories__title">Блог / Категории</div>
+                    <div class="categories__add" onclick="showAddCategory()">+ Добавить категорию</div>
+                </div>
+
+                <div class="categories__list">
+                    <table class="categories__list_table">
+                    </table>
+                </div>
+
+                <div class="categories__new" style="display: none;">
+
+                    <div class="categories__new_header">
+
+                        <div class="categories__new_nav" onclick="changeAddCategory()">
+                            <label id="newCatMainLabel" class="selectedNav__item"
+                                for="categoriesNewMainCheckbox">Основные</label>
+                            <input type="radio" checked name="categoriesNewCheckbox" id="categoriesNewMainCheckbox"
+                                style="display: none;">
+                            <label id="newCatSeoLabel" for="categoriesNewSeoCheckbox">SEO</label>
+                            <input type="radio" name="categoriesNewCheckbox" id="categoriesNewSeoCheckbox"
+                                style="display: none;">
+                        </div>
+
+                    </div>
+
+                    <div class="categories__new_main">
+                        <div class="categories__new_title">
+                            <label for="newCategoryName">Название: </label>
+                            <input type="text" id="newCategoryName" placeholder="Название...">
+                        </div>
+                        <div class="categories__new_isActive">
+                            <label for="newCategoryIsActive" class="newCategoryIsActive">Активность</label>
+                            <input type="checkbox" id="newCategoryIsActive">
+                        </div>
+                    </div>
+
+                    <div class="catecories__new_seo" style="display: none;">
+                        <div class="catecories__new_seo_left">
+                            <div class="categories__new_label">
+                                <label for="categoriesNewSeoTitle" class="categoriesNewSeoTitle">Заголовок: </label>
+                            </div>
+                            <div class="categories__new_label">
+                                <label for="categoriesNewSeoKeywords">Ключевые слова:</label>
+                            </div>
+                            <div class="categories__new_label">
+                                <label for="categoriesNewSeoDesctription">Описание:</label>
+                            </div>
+                            <div class="categories__new_label">
+                                <label for="categoriesNewSeoText">SEO текст:</label>
+                            </div>
+                        </div>
+                        <div class="catecories__new_seo_rigt">
+
+                            <div class="categories__new_seo_title">
+                                <input type="text" id="categoriesNewSeoTitle">
+                            </div>
+
+                            <div class="categories__new_seo_kewords">
+                                <input type="text" id="categoriesNewSeoKeywords">
+                            </div>
+
+                            <div class="categories__new_seo_description">
+                                <input type="text" id="categoriesNewSeoDesctription">
+                            </div>
+
+                            <div class="categories__new_seo_text">
+                                <textarea id='categoriesNewSeoText'></textarea>
+                                <script>CKEDITOR.replace('categoriesNewSeoText')</script>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="categories__new_do">
+                        <button class="newCategory__save green" onclick="addCategory()">Сохранить</button>
+                        <button class="newCategory__cancel green" onclick="addCategoryCancel()">Назад</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="editCategory" style="display: none;">
+                <div class="editCategory__header">
+                    <div class="editCategory__title">Блог / Редактирование категории</div>
+                </div>
+
+                <div class="editCategory__edit_title">
+
+                </div>
+                <div class="editCategory__do">
+                </div>
+            </div>
+            <!-- ==================Категории========================= -->
+
+
+
+            <!-- ==================Комментарии==========================-->
+            <div class="comments" style="display: none;">
+                <div class="comments__header">
+                    <div class="comments__title">Блог / Комментарии</div>
+                </div>
+
+                <div class="comments__nav" onclick="changeComments()">
+                    <label id="blogCommentsLabel" class="selectedNav__item" for="BlogCommentsCheckbox">Блог</label>
+                    <input type="radio" checked name="CommentsCheckbox" id="BlogCommentsCheckbox"
+                        style="display: none;">
+                    <label id="newsCommentsLabel" for="newsCommentsBox">Новости</label>
+                    <input type="radio" name="CommentsCheckbox" id="newsCommentsBox" style="display: none;">
+                </div>
+
+                <div class="comments__selector">
+
+                    <label for="selectAllComments">Отметить все: </label>
+                    <input type="checkbox" name="selectSelectedAllComments" id="selectAllComments"
+                        onclick="selectAllComments(event)">
+
+                    <span id="approveSelectedComment" onclick="approveSelectedComment()">Одобрить</span> <span
+                        id="deleteSelectedComment" onclick="deleteSelectedComment()">Удалить</span>
+                </div>
+
+                <div class="blog__comments_list">
+                    <table class="blog__comments_list_table"></table>
+                </div>
+
+                <div class="news__comments_list" style="display: none;">
+                    <table class="news__comments_list_table"></table>
+                </div>
+            </div>
+            <!-- ==================Комментарии==========================-->
+
+        </div>
+    </section>
+
+
+
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
